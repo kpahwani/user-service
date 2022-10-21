@@ -42,16 +42,6 @@ const unfollowUser = ({ followerId, followeeId }) => {
 };
 
 
-const getFollowers = (userId) => {
-    return usersDbHelper.getFollowers(userId);
-};
-
-
-const getFollowing = (userId) => {
-    return usersDbHelper.getFollowing(userId);
-};
-
-
 module.exports = {
     registerUser,
     updateUser,

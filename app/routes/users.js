@@ -42,18 +42,4 @@ usersRoutes.post('/unfollow', asyncRouteHandler(async (req, res) => {
 }));
 
 
-usersRoutes.get('/followers/:userId', asyncRouteHandler(async (req, res) => {
-    const userId = req.params.userId;
-    const followers = await usersController.getFollowers(userId);
-    res.send(followers);
-}));
-
-
-usersRoutes.get('/following/:userId', asyncRouteHandler(async (req, res) => {
-    const userId = req.params.userId;
-    const followings = await usersController.getFollowing(userId);
-    res.send(followings);
-}));
-
-
 module.exports = usersRoutes;
