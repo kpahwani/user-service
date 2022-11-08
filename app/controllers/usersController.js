@@ -15,6 +15,39 @@ const registerUser = async (data) => {
 };
 
 
+const updateUser = async (userId, dataToUpdate) => {
+    let user = await usersDbHelper.updateUserById(userId, dataToUpdate);
+    return user || {};
+};
+
+
+const getUserDetails = async (userId) => {
+    let user = await usersDbHelper.getUserById(userId);
+    if(user) {
+        user = user.toObject()
+        user.followers = await usersDbHelper.getFollowers(userId) || 111;
+        user.following = await usersDbHelper.getFollowing(userId);
+    }
+    return user || {};
+};
+
+
+const followUser = ({ followerId, followeeId }) => {
+    return usersDbHelper.followUser(followerId, followeeId)
+};
+
+
+const unfollowUser = ({ followerId, followeeId }) => {
+    return usersDbHelper.unfollowUser(followerId, followeeId)
+};
+
+
 module.exports = {
-    registerUser
+    registerUser,
+    updateUser,
+    getUserDetails,
+    followUser,
+    unfollowUser,
+    getFollowers,
+    getFollowing
 };
