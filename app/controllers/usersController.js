@@ -4,13 +4,14 @@ const { hashPassword } = require('../helpers/auth/auth');
 
 
 const registerUser = async (data) => {
-    const { email, password } = data;
+    const { email, password, ...userData } = data;
     if( !email || !password ) throw Error(`email or password not present, email: ${email}, password: ${password}`);
     const hashedPassword = await hashPassword(password);
-    const user = await usersDbHelper.registerUser({ email, password: hashedPassword });
+    const user = await usersDbHelper.registerUser({ email, password: hashedPassword, ...userData });
     return {
         id: user._id,
-        email
+        email,
+        ...userData
     };
 };
 
@@ -47,7 +48,5 @@ module.exports = {
     updateUser,
     getUserDetails,
     followUser,
-    unfollowUser,
-    getFollowers,
-    getFollowing
+    unfollowUser
 };

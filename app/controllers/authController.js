@@ -11,7 +11,7 @@ const loginUser = async (data) => {
     if( !email || !password ) throw new Error(`email or password not present, email: ${email}, password: ${password}`);
 
     const user = await usersDbHelper.fetchUserByEmail(email);
-    if(!user || !isValidPassword(password, user.password)) throw new Error('Invalid Credentials');
+    if(!user || !(await isValidPassword(password, user.password))) throw new Error('Invalid Credentials');
 
     const payload = { email, name: user.name };
     const accessToken = createAccessToken(payload);
