@@ -1,0 +1,69 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "description": "This service container user related apis and auth apis",
+        "title": "Users and Auth Apis",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8006",
+            "description": "local server - http"
+        },
+        {
+            "url": "https://localhost:8006",
+            "description": "local server - https"
+        }
+    ],
+    "paths": {
+        "/register": {
+            "post": {
+                "summary": "registers new user",
+                "description": "This api registers a new user",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "new user registration successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Oliver Twist"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "oliver.twist@gmail.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "oli#123@"
+                    }
+                }
+            }
+        }
+    }
+}
